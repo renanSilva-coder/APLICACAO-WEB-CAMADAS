@@ -1,0 +1,9 @@
+ORM - OBJECT RELATIONAL MAPPER
+
+é uma camada no programa que faz as querys de SQL, nos distanciando mais de programar em SQL no projeto.
+
+É bom que o ORM tenha suporte para muitos bancos, pq vc consegue migrar seu banco para um outro tipo de conexão , seja de mysql para sql, ou oracle, facilita muito. Vai que vc quer mudar de banco, ou se o cliente quer usar em outro banco do que vc fez, o ORM ajuda muito. 
+ 
+O ORM do laravel se chama Eloquent
+
+
