@@ -9,7 +9,7 @@ class Funcionario extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id',
+    protected $fillable = [ 'id',
                             'nome',
                             'email',
                             'telefone',
@@ -19,7 +19,7 @@ class Funcionario extends Model
     //se voce não colocar o comando abaixo para nomear
     //a tabela, o Eloquent cria o nome em inglês e no 
     // plural 
-    protected $table = 'Funcionario';
+    protected $table = 'Funcionarios';
 
     /**
      * É POSSÍVEL MUDAR A CHAVE PRIMÁRIA ASSIM:

@@ -1,0 +1,34 @@
+Tinker: testador para Models
+para testes rápidos
+
+inserindo valor na tabela da classe Funcionario
+ App\Models\Funcionario::create(['nome' => 'Renan', 'email' => 'renan@senac.com', 'telefone' => 11987654321, 'endereco' => 'Rua do aluno renan' ]);
+
+consultando valor na tabela da classe Funcionario
+ App\Models\Funcionario::find(1);
+
+Criando um obj com todos os dados que se tem
+$funcdois = App\Models\Funcionario::find(2);
+
+Alterando um dado:
+$funcdois->update(['endereco' => 'Rua do Buddy, 10']);
+
+Puxando todos os registros com seus dados
+App\Models\Funcionario::all();
+
+
+dá pra criar um método que contrói a relação entre tabelas, ex.: 
+
+public function vendas(){
+return $this->hasMany(Venda::class, 'cliente_id');
+} 
+
+depois pra verificar a relação pode-se usar App\Model\Cliente::find(1)->vendas; 
+
+sem o () mesmo.
+
+Tem documentação do tinker:
+laravel.com/docs/8.x/artisan#tinker
+
+Como fazer relacionamentos no Laravel Tinker desde o inicio:
+https://medium.com/@leandroembu/testando-relacionamentos-com-o-laravel-tinker-cf1fe028608f
