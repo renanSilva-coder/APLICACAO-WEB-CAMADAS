@@ -17,7 +17,7 @@ class Cliente extends Model
                         ];
 
     protected $table = 'Cliente';
-
+ 
     //metodo que contrói o relacionamento entre tabelas, herdo hasMany de Model
     public function vendas(){//model de destino(model que estou relacionando com Model Cliente)
         return $this->hasMany(Venda::class, 'cliente_id');//pego tudo que tem na classe Venda, e digo onde ta locazido o id do cliente na Model Venda é 'cliente_id';
