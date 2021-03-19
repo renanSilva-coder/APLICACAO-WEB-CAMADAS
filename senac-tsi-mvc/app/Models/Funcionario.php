@@ -10,6 +10,7 @@ class Funcionario extends Model
     use HasFactory;
 
     protected $fillable = [ 'id',
+                            'venda_id',
                             'nome',
                             'email',
                             'telefone',
@@ -20,6 +21,10 @@ class Funcionario extends Model
     //a tabela, o Eloquent cria o nome em inglês e no 
     // plural 
     protected $table = 'Funcionarios';
+
+    public function funcionarioVenda(){
+        return $this->hasMany(VendaFuncionario::class, 'venda_id');
+    }
 
     /**
      * É POSSÍVEL MUDAR A CHAVE PRIMÁRIA ASSIM:
