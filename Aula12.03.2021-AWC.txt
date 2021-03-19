@@ -1,1 +1,93 @@
-dfpsdfnp
+Relacionamentos 
+
+Trait é como uma classe que contém atributos e métodos e essas coisas dessa trait podem ser usadas em classes sem limites com um use dentro da classe, ou seja, além do extends para herdar atributos e tudo mais, uma classe normal pode usar traits e seus conteúdos como uma "herança".E ainda mantendo cada responsabilidade isolada. 
+
+Trait NÃO EXISTE EM TODA LINGUAGEM no php existe 
+
+PARA DELETAR UMA TABELA:
+php estagiario make:migration drop_tabela_vendas
+na migration: deixa a function up com:
+Schema::dropIfExists('nome_da_tabela');
+
+somente, e a function down deixa vazia.
+
+Fazer chave extrangeira:
+Na model da tabela vendas:
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class RecriaTabelaVendas extends Migration
+{
+
+public function up()
+    {
+        Schema::create('Vendas', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('cliente_id')->unsigned();
+            $table->bigInteger('funcionario_id')->unsigned();
+            $table->date('data_venda');
+            $table->double('valor', 12, 2);
+            $table->timestamps();
+            
+FK ---->    $table->foreign('cliente_id')->references('id')->on(
+coloco uma          'cliente')->onDelete('cascade');
+fk que referencia a tabela cliente            
+            $table->charset = 'utf8';
+            $table->collation = 'utf8_unicode_ci';
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('Vendas');
+    }
+}
+}
+
+VIEWS COM TEMPLATES
+
+na pasta views, cria-se além do arquivo welcome que já está lá, uma view qualquer avisos.blade.php, uma pasta layouts com um arquivo externo.blade.php
+
+no externo.blade.php:
+
+<html>
+    <head>  <title>@yield('title')</title>  </head>
+    <body>
+        @section('sidebar')
+        -------------------------------------------------------<br>
+        | Uma bela barra superior (use a imaginação) | <br>
+        -------------------------------------------------------
+        @show
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+
+no avisos.blade.php:
+
+@extends('layouts.externo')
+@section('title', 'Quadro de Avisos da Empresa')
+@section('sidebar')
+    @parent
+    <p>^ ^ Barra superior adicionada do layout pai/mãe ^ ^ </p>
+@endsection
+@section('content')
+    <p>Quadro de Avisos da Empresa</p>
+@endsection
+
+
+Criando a rota:
+Route::get('/avisos', function () {
+    return view('avisos');
+});
+
+em web.php, ao chamar localhost/avisos no navegador ele trará esses comandos em php que está no arquivo avisos, que por sua vez extende para o arquivo externo
+
+esses arquivos blade.php aceitam códigos php, é um HTML mais fortificado e completado com essas funcionalidades, normalmente adiciona-se o php com @, por exemplo:
+@if (x == 12)
+echo 'nois';
+@endif
