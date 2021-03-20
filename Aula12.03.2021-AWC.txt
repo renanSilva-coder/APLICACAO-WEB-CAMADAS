@@ -89,5 +89,7 @@ em web.php, ao chamar localhost/avisos no navegador ele trará esses comandos em
 
 esses arquivos blade.php aceitam códigos php, é um HTML mais fortificado e completado com essas funcionalidades, normalmente adiciona-se o php com @, por exemplo:
 @if (x == 12)
-echo 'nois';
+  x é 12
+@else
+ x não é 12
 @endif

@@ -18,5 +18,13 @@ Route::get('/', function () {
 });
 
 Route::get('/avisos', function () {
-    return view('avisos');
+    return view('avisos', array ('nome' => 'Renan', 
+                            'mostrar' => true,
+                            'avisos' => array( ['id'=>1,
+                                                'texto'=>'Feriados adiantados galera'],
+                                               
+                                                ['id'=>2,
+                                                'texto'=>'Hoje é hamburguer no almoço'])));
 });
+
+

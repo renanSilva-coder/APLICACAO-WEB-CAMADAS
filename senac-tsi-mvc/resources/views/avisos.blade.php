@@ -2,8 +2,23 @@
 @section('title', 'Quadro de Avisos da Empresa')
 @section('sidebar')
     @parent
-    <p>^ ^ Barra superior adicionada do layout pai/mãe ^ ^ </p>
+    <p>^ ^ Barra superior adicionada do layout pai/mae; ^ ^ </p>
 @endsection
 @section('content')
     <p>Quadro de Avisos da Empresa</p>
+    <p>Olá {{ $nome }}! Veja os avisos abaixo e anote(se quiser):</p>
+    @if ($mostrar)
+        <h2>Avisos: </h2>
+        @foreach ($avisos as $aviso)
+            <p>Aviso #{{$aviso['id']}}: {{$aviso['texto']}}</p>
+        @endforeach
+        <!-- OUUUU: 
+        <?php
+        // foreach ($avisos as $aviso){
+        //     echo "<p>Aviso #{$aviso['id']}: {$aviso['texto']}</p>";
+        // }
+        ?> -->
+    @else
+        O aviso não será exibido!
+    @endif
 @endsection
