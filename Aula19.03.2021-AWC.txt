@@ -1,0 +1,56 @@
+usabilidade de route:
+
+arquivo web.php:
+Route::get('/avisos', function () {
+    return view('avisos', array ('nome' => 'Renan', 
+                            'mostrar' => true,
+                            'avisos' => array( ['id'=>1,
+                                                'texto'=>'Feriados adiantados galera'],
+                                               
+                                                ['id'=>2,
+                                                'texto'=>'Hoje é hamburguer no almoço'])));
+});
+
+arquivo dentro de views avisos.blade.php:
+
+@extends('layouts.externo')
+@section('title', 'Quadro de Avisos da Empresa')
+@section('sidebar')
+    @parent
+    <p>^ ^ Barra superior adicionada do layout pai/mae; ^ ^ </p>
+@endsection
+@section('content')
+    <p>Quadro de Avisos da Empresa</p>
+    <p>Olá {{ $nome }}! Veja os avisos abaixo e anote(se quiser):</p>
+    @if ($mostrar)
+        <h2>Avisos: </h2>
+        @foreach ($avisos as $aviso)
+            <p>Aviso #{{$aviso['id']}}: {{$aviso['texto']}}</p>
+        @endforeach
+        <!-- OUUUU: 
+        <?php
+        // foreach ($avisos as $aviso){
+        //     echo "<p>Aviso #{$aviso['id']}: {$aviso['texto']}</p>";
+        // }
+        ?> -->
+    @else
+        O aviso não será exibido!
+    @endif
+@endsection
+
+dentro de views>layouts> no arquivo externo.blade.php:
+
+<html>
+    <head>  <title>@yield('title')</title>  </head>
+    <body>
+        @section('sidebar')
+        -------------------------------------------------------<br>
+        | Uma bela barra superior (use a imaginação) | <br>
+        -------------------------------------------------------
+        @show
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+

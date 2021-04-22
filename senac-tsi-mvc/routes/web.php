@@ -23,8 +23,11 @@ Route::get('/avisos', function () {
                             'avisos' => array( ['id'=>1,
                                                 'texto'=>'Feriados adiantados galera'],
                                                
-                                                ['id'=>2,
-                                                'texto'=>'Hoje é hamburguer no almoço'])));
+                                               ['id'=>2,
+                                                'texto'=>'Hoje é hamburguer no almoço'],
+
+                                               ['id'=>3,
+                                                'texto'=>'Não temos suco'] )));
 });
 
 

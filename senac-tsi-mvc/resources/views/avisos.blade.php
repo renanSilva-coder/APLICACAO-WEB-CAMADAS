@@ -19,6 +19,6 @@
         // }
         ?> -->
     @else
-        O aviso não será exibido!
+        Os avisos não estão disponíveis ou não existem avisos!
     @endif
 @endsection
