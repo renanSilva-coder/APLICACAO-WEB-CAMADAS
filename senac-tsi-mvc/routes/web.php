@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\FuncionariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,15 @@ Route::get('/avisos', function () {
 });
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'clientes'], function (){
+    Route::get('/listar', [ClientesController::class, 'listar'])->middleware('auth');//rota que puxa a função listar na view listar e precisa de autentificação para acessar, ou seja, estar registrado no sistema
+});
+
+Route::group(['prefix' => 'funcionarios'], function (){
+    Route::get('/listar', [FuncionariosController::class, 'listar'])->middleware('auth');
+});
