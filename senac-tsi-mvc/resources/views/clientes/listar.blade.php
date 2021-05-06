@@ -10,7 +10,7 @@
     <div class="container p-4">
         <table class="table">
             <thead>
-                <tr>
+                <tr class="table-primary">
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Endereço</th>
@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             @foreach($clientes as $cliente)
-                <tr>
+                <tr class="table-light">
                     <td>{{$cliente->id}}</td>
                     <td>{{$cliente->nome}}</td>
                     <td>{{$cliente->endereco}}</td>

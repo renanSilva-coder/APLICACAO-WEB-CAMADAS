@@ -24,7 +24,7 @@ class UserController extends Controller
     public function create(){
         $roles = Role::pluck('name','name')->all();
         //pluck é arrancar, na linha de cima eu pelo o nome dos papeis e listo por nome
-        return view('users.create', compact($roles));
+        return view('users.create', compact('roles'));
     }
 
 
@@ -58,20 +58,44 @@ class UserController extends Controller
 
         $roles = Role::pluck('name', 'name')->all();//Pega todos os perfis
 
-        $userRole = $user->$roles->pluck('name', 'name')->all();// pega o perfil específico do usuário 
+        $userRole = $user->roles->pluck('name', 'name')->all();// pega o perfil específico do usuário 
         
         return view('users.edit', compact('user','roles','userRole'));
     }
 
     public function update(Request $request, $id)
     {
-        User::find($id)->delete();
+       $this->validate($request, 
+                        [   'name' => 'required',
+                            'email' => 'required|email|unique:users,email',
+                            'password' => 'required|same:confirm-password',
+                            'roles' => 'required']);
 
-        return redirect()->route('users.index')->with('success', 'Usuário removido com sucesso!');
+        $entrada_de_dados = $request->all();
+
+
+        if (!empty($entrada_de_dados['password'])) {
+            $entrada_de_dados['password'] = Hash::make($entrada_de_dados['password']);
+        }else{
+            $entrada_de_dados = Arr::except( $entrada_de_dados, ['password'] );
+        }
+
+        $user = User::find($id);
+
+        $user->update($entrada_de_dados); 
+
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+
+        $user->assignRole($request->input('roles'));
+
+        return redirect()->route('users.index')->with('success','Usuário atualziado com sucesso!');
+
     }
 
     public function destroy($id)
     {
-        //
+         User::find($id)->delete();
+
+        return redirect()->route('users.index')->with('success', 'Usuário removido com sucesso!');
     }
 }
