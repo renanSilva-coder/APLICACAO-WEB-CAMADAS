@@ -48,6 +48,10 @@ Route::group(['prefix' => 'funcionarios'], function (){
 });
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::resource('/clientes', App\Http\Controllers\ClientesController::class);
+});
+
+Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/users', UserController::class);
     Route::resource('/roles', App\Http\Controllers\RoleController::class);
